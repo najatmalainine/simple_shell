@@ -56,3 +56,16 @@ void free_double_ptr(char **str)
 	}
 	free(str);
 }
+
+/**
+ * ignore_c - ignoring spaces and new lines
+ * @str: enviromantal varaibles
+ * Return: new string
+ */
+
+char *ignore_c(char *str)
+{
+	while (*str == ' ' || *str == '\n')
+		str++;
+	return (str);
+}

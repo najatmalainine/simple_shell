@@ -56,7 +56,7 @@ void non_interactive(list_t *env)
 	{
 		command_line_no++;
 		token = NULL;
-		token = _st_tok(n_line[n], " ");
+		token = _strtok(n_line[n], " ");
 		exit_stat = built_in(env, token, command_line_no, n_line);
 		if (exit_stat)
 		{

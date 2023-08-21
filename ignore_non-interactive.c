@@ -1,4 +1,34 @@
 #include "shell.h"
+
+/**
+ * ignore_c - ignoring spaces and new lines
+ * @str: enviromantal varaibles
+ * Return: new string
+ */
+
+char *ignore_c(char *str)
+{
+	while (*str == ' ' || *str == '\n')
+		str++;
+	return (str);
+}
+
+/**
+ * free_db - free malloced arrays
+ * @str: array of strings
+ */
+void free_db(char **str)
+{
+	int i = 0;
+
+	while (str[i] != NULL)
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
 /**
  * non_interactive - when user pipes in command into shell via pipeline
  * @env: Enviromental variable
@@ -18,7 +48,7 @@ void non_interactive(list_t *env)
 	}
 	n_command = command;
 	command = c_ignore(command);
-	n_line = _str_tok(command, "\n");
+	n_line = _strtok(command, "\n");
 	if (n_command != NULL)
 		free(n_command);
 	m = 0;
@@ -26,46 +56,17 @@ void non_interactive(list_t *env)
 	{
 		command_line_no++;
 		token = NULL;
-		token = _str_tok(n_line[n], " ");
+		token = _st_tok(n_line[n], " ");
 		exit_stat = built_in(env, token, command_line_no, n_line);
 		if (exit_stat)
 		{
-			n++;
+			m++;
 			continue;
 		}
-		exit_stat = _excve(env, token, command_line_no);
+		exit_stat = _execve(env, token, command_line_no);
 		m++;
 	}
-	free_double_ptr(n_line);
+	free_db(n_line);
 	free_linked_list(env);
 	exit(exit_stat);
-}
-
-/**
- * free_double_ptr - free malloc arrays
- * @str: Array of string
- */
-void free_double_ptr(char **str)
-{
-	int j = 0;
-
-	while (str[j] != NULL)
-	{
-		free(str[j]);
-		j++;
-	}
-	free(str);
-}
-
-/**
- * ignore_c - ignoring spaces and new lines
- * @str: enviromantal varaibles
- * Return: new string
- */
-
-char *ignore_c(char *str)
-{
-	while (*str == ' ' || *str == '\n')
-		str++;
-	return (str);
 }

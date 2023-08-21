@@ -22,7 +22,7 @@ void non_interactive(list_t *env)
 	if (n_command != NULL)
 		free(n_command);
 	m = 0;
-	while (n_line[n] != NULL)
+	while (n_line[m] != NULL)
 	{
 		command_line_no++;
 		token = NULL;
@@ -39,4 +39,20 @@ void non_interactive(list_t *env)
 	free_double_ptr(n_line);
 	free_linked_list(env);
 	exit(exit_stat);
+}
+
+/**
+ * free_double_ptr - free malloc arrays
+ * @str: Array of string
+ */
+void free_double_ptr(char **str)
+{
+	int j = 0;
+
+	while (str[j] != NULL)
+	{
+		free(str[j]);
+		j++;
+	}
+	free(str);
 }

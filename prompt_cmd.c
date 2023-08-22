@@ -4,14 +4,14 @@
  * ctrl_d - if ctrl-d was typed exit program
  * @c: the characters that _getline reads
  * @cmd: the user's command
- * @envi: environment variable
+ * @enm: environment variable
  */
-void ctrl_d(int c, char *cmd, list_t *envi)
+void ctrl_d(int c, char *cmd, list_t *enm)
 {
 	if (c == 0)
 	{
 		free(cmd);
-		free_linked_list(envi);
+		free_linked_list(enm);
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "\n", 1);
 		exit(0);
@@ -44,22 +44,22 @@ char *takein_space(char *s)
 /**
  * _builtin - builtin functions
  * @tkn: the typed in command
- * @envi: the environmental variable
+ * @enm: the environmental variable
  * @n: the nth user command typed for errors
  * @cmd: the command to free
  * Return: 1 if acted on builtin, 0 if not
  */
-int _builtin(char **tkn, list_t *envi, int n, char **cmd)
+int _builtin(char **tkn, list_t *enm, int n, char **cmd)
 {
 	int i = 0;
 
 	if (_strcmp(tkn[0], "exit") == 0)
 	{
-		i = ___exit(tkn, envi, n, cmd);
+		i = ___exit(tkn, enm, n, cmd);
 	}
-	else if (_strcmp(tkn[0], "env") == 0)
+	else if (_strcmp(tkn[0], "enm") == 0)
 	{
-		_env(tkn, envi);
+		_enm(tkn, envi);
 		i = 1;
 	}
 	else if (_strcmp(tkn[0], "cd") == 0)
@@ -68,12 +68,12 @@ int _builtin(char **tkn, list_t *envi, int n, char **cmd)
 	}
 	else if (_strcmp(tkn[0], "setenv") == 0)
 	{
-		_setenv(&envi, tkn);
+		_setenm(&envi, tkn);
 		i = 1;
 	}
 	else if (_strcmp(tkn[0], "unsetenv") == 0)
 	{
-		_unsetenv(&envi, tkn);
+		_unsetenm(&envi, tkn);
 		i = 1;
 	}
 	return (i);

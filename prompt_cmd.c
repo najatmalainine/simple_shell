@@ -2,7 +2,7 @@
 
 /**
  * prints_prompt - Repeatedly prints user typed command
- * @ev: Enviromental variables
+ * @ev: Typed in Enviromental variables
  * Return: 0 for success
  */
 int prints_prompt(char **ev)
@@ -10,7 +10,7 @@ int prints_prompt(char **ev)
 	list_t *env;
 	char *command, *n_command, **token;
 	int command_line_no = 0, exit_stat = 0;
-	size_t j = 0, n = 0;
+	size_t j = 0, m = 0;
 
 	env = env_linked_list(ev);
 	do {
@@ -25,10 +25,10 @@ int prints_prompt(char **ev)
 		ctrl_D(j, command, env);
 		n_command = command;
 		command = ignore_space(command);
-		n = 0;
-		while (command[n] != '\n')
-			n++;
-		command[n] '\0';
+		m = 0;
+		while (command[m] != '\n')
+			m++;
+		command[m] '\0';
 		if (command[0] == '\0')
 		{
 			free(n_command);
@@ -55,3 +55,43 @@ void ctrl_c(int m)
 
 	write(STDOUT_FILENO, "\n$ ", 3);
 }
+
+/**
+ * handles_builtin - builtin functions are taken care of (exit, env, cd)
+ * @command: As user typed, brings command to free
+ * @token: typed in  command
+ * @env: typed in Enviromental variables
+ * @num: Write error message after taking in command
+ * Return: 1 for success, else 0
+ */
+
+int handles_builtin(char **token, int num, char **command, list_t *env)
+{
+	int j = 0;
+
+	if (_strcmp(token[0], "exit") == 0)
+	{
+		j = _exit(token, command, num, env);
+	}
+	else if (_strcmp(token[0], "unsetenv") == 0)
+	{
+		_unsetenv(&env, token);
+		j = 1;
+	}
+	else if (_strcmp(token[0], "setenv") == 0)
+	{
+		_setenv(&env, token);
+		j = 1;
+	}
+	else if (_strcmp(token[0], "cd") == 0)
+	{
+		j = _cd(token, num, env);
+	}
+	else if (_strcmp(token[0], "env") == 0)
+	{
+		_env(env, token);
+		j = 1;
+	}
+	return (1);
+}
+

@@ -118,3 +118,47 @@ int cd_exec(list_t *envi, char *cur, char *dir, char *str, int n)
 	}
 	return (j);
 }
+/**
+ * _cd - change directory
+ * @cmd: the user's command
+ * @envi: enviromental variable
+ * @n: the nth user's command
+ * Return: 0 if success 2 if failed
+ */
+int _cd(char **cmd, list_t *envi, int n)
+{
+	char *cur = NULL, *dir = NULL;
+	int exit_stat = 0;
+
+	cur = getcwd(cur, 0);
+	if (cmd[1] != NULL)
+	{
+		if (cmd[1][0] == '~')
+		{
+			dir = _getenv("home", envi);
+			dir = f_strcat(dir, cmd[1]);
+		}
+		else if (cmd[1][0] == '-')
+		{
+			if (cmd[1][1] == '\0')
+				dir = _getenv("pwd_old", envi);
+		}
+		else
+		{
+			if (cmd[1][0] != '/')
+			{
+				dir = getcwd(dir, 0);
+				dir = _strcat(dir, "/");
+				dir = _strcat(dir, cmd[1]);
+			}
+			else
+				dir = _strdup(cmd[1]);
+		}
+		exit_stat = cd_exec(envi, cur, dir, cmd[1], n);
+		free(dir);
+	}
+	else
+		cd_home(envi, cur);
+	free_db(cmd);
+	return (exit_stat);
+}

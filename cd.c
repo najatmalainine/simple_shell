@@ -87,3 +87,34 @@ void cd_home(list_t *envi, char *cur)
 	free(cur);
 	free(home);
 }
+/**
+ * cd_exec - executing the cd command
+ * @envi: environmental variable
+ * @cur: the current working directotry
+ * @dir: directory path
+ * @str: the 1st argument to write out error
+ * @n: the line number
+ * Return: 0 if success 2 if fail
+ */
+int cd_exec(list_t *envi, char *cur, char *dir, char *str, int n)
+{
+	int j = 0;
+
+	if (access(dir, F_OK) == 0)
+	{
+		f_setenv(&envi, "pwd_old", cur);
+		free(cur);
+		chdir(dir);
+		cur = NULL;
+		cur = getcwd(cur, 0);
+		f_setenv(&envi, "pwd", cur);
+		free(cur);
+	}
+	else
+	{
+		cmd_invalid(str, n, envi);
+		free(cur);
+		j = 2;
+	}
+	return (j);
+}

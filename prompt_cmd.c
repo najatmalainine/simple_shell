@@ -114,3 +114,14 @@ void ctrl_D(int j, list_t *env, char *command)
 	}
 }
 
+/**
+ * takein_space - while user typed command, return str without space in front
+ * @str: User tyed input string
+ * Return: String, for success
+ */
+char takein_space(char *str)
+{
+	while (*str == ' ')
+		str++;
+	return (str);
+}

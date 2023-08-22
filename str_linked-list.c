@@ -34,3 +34,20 @@ size_t prints_linked_list(list_t *l)
 	}
 	return (count);
 }
+
+/**
+ * free_linked_list - User typed in command to free linked list
+ * @list: linked list variables
+ */
+void free_linked_list(list_t *list)
+{
+	list_t *hld;
+
+	while (list != NULL)
+	{
+		hld = list;
+		list = list->next;
+		free(hld->var);
+		free(hld);
+	}
+}

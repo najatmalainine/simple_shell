@@ -62,7 +62,7 @@ void free_linked_list(list_t *list)
 int node_index_rm(list_t **hd, int index)
 {
 	int count = 0;
-	list_t *n_hd;
+	list_t *no_hd;
 	list_t *holder;
 
 	if (*hd == NULL)
@@ -76,16 +76,16 @@ int node_index_rm(list_t **hd, int index)
 		return (1);
 	}
 	count = 1;
-	n_hd = *hd;
+	no_hd = *hd;
 	while (count < index)
 	{
-		if (n_hd == NULL)
+		if (no_hd == NULL)
 			return (-1);
-		n_hd = n_hd->next;
+		no_hd = no_hd->next;
 		count++;
 	}
 	holder = n_hd->next;
-	n_hd->next = holder->next;
+	no_hd->next = holder->next;
 	free(holder->var);
 	free(holder);
 	return (1);
@@ -127,4 +127,3 @@ list_t *add_end_node(char *s, list_t **hd)
 	}
 	return (*head);
 }
-

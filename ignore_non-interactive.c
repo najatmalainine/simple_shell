@@ -40,7 +40,7 @@ void non_interactive(list_t *enm)
 	char *cmd = NULL, *cmd_no = NULL, **n_line, **tkn;
 	size_t j = 0, m = 0;
 
-	j = get_line(&cmd);
+	j = _getline(&cmd);
 	if (j == 0)
 	{
 		free(cmd);
@@ -48,7 +48,7 @@ void non_interactive(list_t *enm)
 	}
 	cmd_no = cmd;
 	cmd = c_ignore(cmd);
-	n_line = _stok(cmd, "\n");
+	n_line = _strtok(cmd, "\n");
 	if (cmd_no != NULL)
 		free(cmd_no);
 	m = 0;
@@ -56,14 +56,14 @@ void non_interactive(list_t *enm)
 	{
 		cmd_line_no++;
 		tkn = NULL;
-		tkn = _stok(n_line[m], " ");
-		ex_status = built_in(enm, tkn, cmd_line_no, n_line);
+		tkn = _strtok(n_line[m], " ");
+		ex_status = _builtin(tkn, enm, cmd_line_no, n_line);
 		if (ex_status)
 		{
 			m++;
 			continue;
 		}
-		ex_status = _execve(enm, tkn, cmd_line_no);
+		ex_status = _execve(tkn, enm, cmd_line_no);
 		m++;
 	}
 	free_db(n_line);

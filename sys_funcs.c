@@ -35,3 +35,15 @@ char *_which(char *s, list_t *envi)
 	free_db(tokens);
 	return (s);
 }
+
+/**
+ * f_exit - it frees the user's command and linked list
+ * @str: user's command
+ * @envi: envirnment variable
+ */
+void f_exit(char **str, list_t *envi)
+{
+	free_db(str);
+	free_linked_list(envi);
+	_exit(0);
+}

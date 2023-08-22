@@ -12,7 +12,7 @@ void invalid_number(list_t *env, char *str, int c_n)
 	char *shell = NULL, *num = NULL;
 	int count = 0;
 
-	shell = get_env("_", env);
+	shell = _getenv("_", env);
 	while (shell[count] != '\0')
 		count++;
 	write(STDOUT_FILENO, count, shell);
@@ -45,7 +45,7 @@ void not_found(char *str, int c_n, list_t *env);
 	char *shell, *num;
 	int count = 0;
 
-	shell = get_env("_", env);
+	shell = _getenv("_", env);
 	while (shell[count] != '\0')
 		count++;
 	write(STDOUT_FILENO, shell, count);
@@ -78,7 +78,7 @@ void cmd_invalid(list_t *env, int c_n, char *str)
 	char *shell, *num;
 	int count = 0;
 
-	shell = get_env("_", env);
+	shell = _getenv("_", env);
 	while (shell[count] != '\0')
 		count++;
 	write(STDOUT_FILENO, shell, count);

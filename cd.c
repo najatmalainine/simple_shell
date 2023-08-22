@@ -67,3 +67,23 @@ int f_setenv(list_t **envi, char *name, char *dir)
 	free(cat);
 	return (0);
 }
+/**
+ * cd_home - move to the home directory
+ * @envi: environment variable
+ * @cur: current working directotry
+ */
+void cd_home(list_t *envi, char *cur)
+{
+	char *home = NULL;
+
+	home = _getenv("home", envi);
+	f_setenv(&envi, "pwd_old", cur);
+	free(cur);
+	if (access(home, F_OK) == 0)
+		chdir(home);
+	cur = NULL;
+	cur = getcwd(cur, 0);
+	f_setenv(&envi, "pwd", cur);
+	free(cur);
+	free(home);
+}

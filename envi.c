@@ -57,3 +57,28 @@ char *_getenv(char *s, list_t *envi)
 	n++;
 	return (c_strdup(envi->var, n));
 }
+
+/**
+ * f_envi - it finds environment variable
+ * @envi: environment variable
+ * @s: variable name
+ * Return: the index of the node
+ */
+int f_envi(list_t *envi, char *s)
+{
+	int i = 0, idx = 0;
+
+	while (envi != NULL)
+	{
+		i = 0;
+		while ((envi->var)[i] == s[i])
+			i++;
+		if (s[i] == '\0')
+			break;
+		envi = envi->next;
+		idx++;
+	}
+	if (envi == NULL)
+		return (-1);
+	return (idx);
+}

@@ -11,6 +11,6 @@ int main(int agc, char **agv, char **enm)
 	(void)agc;
 	(void)agv;
 
-	prompt(enm);
+	prints_prompt(enm);
 	return (0);
 }

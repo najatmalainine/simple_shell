@@ -44,22 +44,22 @@ char *takein_space(char *s)
 /**
  * _builtin - builtin functions
  * @tkn: the typed in command
- * @enm: the environmental variable
+ * @envi: the environmental variable
  * @n: the nth user command typed for errors
  * @cmd: the command to free
  * Return: 1 if acted on builtin, 0 if not
  */
-int _builtin(char **tkn, list_t *enm, int n, char **cmd)
+int _builtin(char **tkn, list_t *envi, int n, char **cmd)
 {
 	int i = 0;
 
 	if (_strcmp(tkn[0], "exit") == 0)
 	{
-		i = ___exit(tkn, enm, n, cmd);
+		i = ___exit(tkn, envi, n, cmd);
 	}
-	else if (_strcmp(tkn[0], "enm") == 0)
+	else if (_strcmp(tkn[0], "env") == 0)
 	{
-		_enm(tkn, envi);
+		_env(tkn, envi);
 		i = 1;
 	}
 	else if (_strcmp(tkn[0], "cd") == 0)
@@ -68,12 +68,12 @@ int _builtin(char **tkn, list_t *enm, int n, char **cmd)
 	}
 	else if (_strcmp(tkn[0], "setenv") == 0)
 	{
-		_setenm(&envi, tkn);
+		_setenv(&envi, tkn);
 		i = 1;
 	}
 	else if (_strcmp(tkn[0], "unsetenv") == 0)
 	{
-		_unsetenm(&envi, tkn);
+		_unsetenv(&envi, tkn);
 		i = 1;
 	}
 	return (i);
@@ -81,7 +81,7 @@ int _builtin(char **tkn, list_t *enm, int n, char **cmd)
 
 
 /**
- * prints_prompt - Repeatedly prints user typed command
+ * prints_prompt - prints user typed command
  * @ev: envrionmental variables
  * Return: 0 on success
  */
@@ -119,7 +119,7 @@ int prints_prompt(char **ev)
 		tkn = _strtok(cmd, " ");
 		if (n_cmd != NULL)
 			free(n_cmd);
-		ex_status = built_in(tkn, envi, cmd_no, NULL);
+		ex_status = _builtin(tkn, envi, cmd_no, NULL);
 		if (ex_status)
 			continue;
 		ex_status = _execve(tkn, envi, cmd_no);

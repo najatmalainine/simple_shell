@@ -98,7 +98,7 @@ int node_index_rm(list_t **hd, int index)
  * Return: Pointer to the new linked list
  */
 
-list_t *add_end_node(char *s, list_t **hd)
+list_t *add_end_node(list_t **hd, char *s)
 {
 	list_t *nw;
 	list_t *holder;
@@ -109,7 +109,7 @@ list_t *add_end_node(char *s, list_t **hd)
 	if (nw == NULL)
 		return (NULL);
 
-	nw->var = sdup(s);
+	nw->var = _strdup(s);
 	nw->next = NULL;
 
 	holder = *hd;

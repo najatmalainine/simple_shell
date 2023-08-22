@@ -44,3 +44,14 @@ int prints_prompt(char **ev)
 	} while (1);
 	return (exit_stat);
 }
+
+/**
+ * ctrl_c - Prints prompts by ignoring ctrl-C command
+ * @m: Inputs signal
+ */
+void ctrl_c(int m)
+{
+	(void)m;
+
+	write(STDOUT_FILENO, "\n$ ", 3);
+}

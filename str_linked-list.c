@@ -51,3 +51,42 @@ void free_linked_list(list_t *list)
 		free(hld);
 	}
 }
+
+/**
+ * node_index_rm - The function removes node int at index
+ * @hd: Head address input
+ * @index: Index input int
+ * Return: For success 1, else -1
+ */
+
+int node_index_rm(list_t **hd, int index)
+{
+	int count = 0;
+	list_t *n_hd;
+	list_t *holder;
+
+	if (*hd == NULL)
+		return (-1);
+	if (index == 0)
+	{
+		holder = (*hd)->next;
+		free((*hd)->var);
+		free(*hd);
+		*hd = holder;
+		return (1);
+	}
+	count = 1;
+	n_hd = *hd;
+	while (count < index)
+	{
+		if (n_hd == NULL)
+			return (-1);
+		n_hd = n_hd->next;
+		count++;
+	}
+	holder = n_hd->next;
+	n_hd->next = holder->next;
+	free(holder->var);
+	free(holder);
+	return (1);
+}

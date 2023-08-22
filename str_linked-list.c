@@ -90,3 +90,41 @@ int node_index_rm(list_t **hd, int index)
 	free(holder);
 	return (1);
 }
+
+/**
+ * add_end_node - Passing arguement to add node at linked list end
+ * @hd: linked list head pointer
+ * @s: string data to new node
+ * Return: Pointer to the new linked list
+ */
+
+list_t *add_end_node(char *s, list_t **hd)
+{
+	list_t *nw;
+	list_t *holder;
+
+	if (hd == NULL || s == NULL)
+		return (NULL);
+	nw = malloc(sizeof(list_t));
+	if (nw == NULL)
+		return (NULL);
+
+	nw->var = sdup(s);
+	nw->next = NULL;
+
+	holder = *hd;
+	if (holder != NULL)
+	{
+		while (holder->next != NULL)
+		{
+			holder = holder->next;
+		}
+		holder->next = nw;
+	}
+	else
+	{
+		*head = nw;
+	}
+	return (*head);
+}
+

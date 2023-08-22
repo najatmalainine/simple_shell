@@ -95,3 +95,22 @@ int handles_builtin(char **token, int num, char **command, list_t *env)
 	return (1);
 }
 
+/**
+ * ctrl_D - Exit program if user typed ctrl-d
+ * @env: Linked list enviromental variables
+ * @j: get line character read in value
+ * @command: Typed in command
+ */
+
+void ctrl_D(int j, list_t *env, char *command)
+{
+	if (j == 0)
+	{
+		free(command);
+		free_linked_list(env);
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "\n", 1);
+		exit(0);
+	}
+}
+

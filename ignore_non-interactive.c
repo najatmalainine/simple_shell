@@ -2,71 +2,71 @@
 
 /**
  * ignore_c - ignoring spaces and new lines
- * @str: enviromantal varaibles
+ * @s: enviromantal varaibles
  * Return: new string
  */
 
-char *ignore_c(char *str)
+char *ignore_c(char *s)
 {
-	while (*str == ' ' || *str == '\n')
-		str++;
-	return (str);
+	while (*s == ' ' || *s == '\n')
+		s++;
+	return (s);
 }
 
 /**
  * free_db - free malloced arrays
- * @str: array of strings
+ * @s: array of strings
  */
-void free_db(char **str)
+void free_db(char **s)
 {
-	int i = 0;
+	int j = 0;
 
-	while (str[i] != NULL)
+	while (s[j] != NULL)
 	{
-		free(str[i]);
-		i++;
+		free(s[j]);
+		j++;
 	}
-	free(str);
+	free(s);
 }
 
 /**
  * non_interactive - when user pipes in command into shell via pipeline
- * @env: Enviromental variable
+ * @enm: Enviromental variable
  */
 
-void non_interactive(list_t *env)
+void non_interactive(list_t *enm)
 {
-	int command_line_no = 0, exit_stat;
-	char *command = NULL, *n_command = NULL, **n_line, **token;
+	int cmd_line_no = 0, ex_status;
+	char *cmd = NULL, *cmd_no = NULL, **n_line, **tkn;
 	size_t j = 0, m = 0;
 
-	j = get_line(&command);
+	j = get_line(&cmd);
 	if (j == 0)
 	{
-		free(command);
+		free(cmd);
 		exit(0);
 	}
-	n_command = command;
-	command = c_ignore(command);
-	n_line = _strtok(command, "\n");
-	if (n_command != NULL)
-		free(n_command);
+	cmd_no = cmd;
+	cmd = c_ignore(cmd);
+	n_line = _stok(cmd, "\n");
+	if (cmd_no != NULL)
+		free(cmd_no);
 	m = 0;
 	while (n_line[m] != NULL)
 	{
-		command_line_no++;
-		token = NULL;
-		token = _strtok(n_line[n], " ");
-		exit_stat = built_in(env, token, command_line_no, n_line);
-		if (exit_stat)
+		cmd_line_no++;
+		tkn = NULL;
+		tkn = _stok(n_line[m], " ");
+		ex_status = built_in(enm, tkn, cmd_line_no, n_line);
+		if (ex_status)
 		{
 			m++;
 			continue;
 		}
-		exit_stat = _execve(env, token, command_line_no);
+		ex_status = _execve(enm, tkn, cmd_line_no);
 		m++;
 	}
 	free_db(n_line);
-	free_linked_list(env);
-	exit(exit_stat);
+	free_linked_list(enm);
+	exit(ex_status);
 }

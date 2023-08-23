@@ -31,7 +31,7 @@ size_t _getline(char **str);
 int f_strlen(char *s, int p, char d);
 char *takein_space(char *str);
 char **_strtok(char *str, char *delm);
-char **c_strtok(char *str, char *delm);
+char **f_strtok(char *str, char *delm);
 char *_strcat(char *dest, char *src);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);

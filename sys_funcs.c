@@ -11,8 +11,8 @@ char *_which(char *s, list_t *envi)
 	char *path, *buf = NULL, **tokens;
 	int i = 0;
 
-	path = get_env("PATH", envi);
-	tokens = c_strtok(path, ":");
+	path = _getenv("PATH", envi);
+	tokens = f_strtok(path, ":");
 	free(path);
 
 	i = 0;

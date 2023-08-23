@@ -58,3 +58,50 @@ char *dlm_ignore(char *s, char d)
 		s++;
 	return (s);
 }
+
+/**
+ * _strtok - it tokenizes the string and returns ann array
+ * @s: the command
+ * @d: the delimeter
+ * Return: arrays of token
+ */
+
+char **_strtok(char *s, char *d)
+{
+	int buff_size = 0, ptr = 0, si = 0, i = 0, len = 0, se = 0, t = 0;
+	char **tokens = NULL, ch;
+
+	ch = d[0];
+	s = dlm_ignore(s, ch);
+	buff_size = f_size(s, ch);
+	tokens = malloc(sizeof(char *) * (buff_size + 2));
+	if (tokens == NULL)
+		return (NULL);
+	while (s[se] != '\0')
+		se++;
+	while (si < se)
+	{
+		if (s[si] != ch)
+		{
+			len = f_strlen(s, si, ch);
+			token[ptr] = malloc(sizeof(char) * (len + 1));
+			if (tokens[ptr] == NULL)
+				return (NULL);
+			i = 0;
+			while ((s[si] != ch) && (s[si] != '\0'))
+			{
+				tokens[ptr][i] = s[si];
+				i++;
+				si++;
+			}
+			tokens[ptr][i] = '\0'
+				t++;
+		}
+		if (si < se && (s[si + 1] != ch && s[si + 1] != '\0'
+					ptr++;
+					si++;
+		}
+		ptr++;
+		tokens[ptr] = NULL;
+		return (tokens);
+}

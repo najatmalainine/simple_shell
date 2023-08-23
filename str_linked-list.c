@@ -84,7 +84,7 @@ int node_index_rm(list_t **hd, int index)
 		no_hd = no_hd->next;
 		count++;
 	}
-	holder = n_hd->next;
+	holder = no_hd->next;
 	no_hd->next = holder->next;
 	free(holder->var);
 	free(holder);
@@ -123,7 +123,7 @@ list_t *add_end_node(list_t **hd, char *s)
 	}
 	else
 	{
-		*head = nw;
+		*hd = nw;
 	}
-	return (*head);
+	return (*hd);
 }

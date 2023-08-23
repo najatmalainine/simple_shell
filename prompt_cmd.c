@@ -59,7 +59,7 @@ int _builtin(char **tkn, list_t *envi, int n, char **cmd)
 	}
 	else if (_strcmp(tkn[0], "env") == 0)
 	{
-		_env(tkn, envi);
+		_enm(tkn, envi);
 		i = 1;
 	}
 	else if (_strcmp(tkn[0], "cd") == 0)
@@ -92,7 +92,7 @@ int prints_prompt(char **ev)
 	int cmd_no = 0, ex_status = 0;
 	char *cmd, *n_cmd, **tkn;
 
-	envi = env_linked_list(ev);
+	envi = enm_linked_list(ev);
 	do {
 		cmd_no++;
 		if (isatty(STDIN_FILENO))

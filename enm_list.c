@@ -12,7 +12,7 @@ list_t *enm_linked_list(char **enm)
 	int j = 0;
 
 	hd = NULL;
-	while (enm[j] != NULL0)
+	while (enm[j] != NULL)
 	{
 		add_end_node(&hd, enm[j]);
 		j++;

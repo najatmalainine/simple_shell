@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * f_strlen - it returns the token's stright length
+ * f_strlen - it returns the token's string length
  * @s: the token
  * @p: the position of the index in the command
  * @d: the delimeter
  * Return: the length of the token
  */
-int f_strlen(char *s, int p, char d);
+int f_strlen(char *s, int p, char d)
 {
 	int length = 0;
 
@@ -20,12 +20,11 @@ int f_strlen(char *s, int p, char d);
 }
 
 /**
- * f_size - It returns the number of delimeters
+ * f_size - it returns the number of delimeters
  * @s: the command
  * @d: the delimeter
  * Return: the number of delimeters
  */
-
 int f_size(char *s, char d)
 {
 	int j = 0, delm_no = 0;
@@ -46,12 +45,11 @@ int f_size(char *s, char d)
 }
 
 /**
- * dlm_ignore - It return the string without pre delimeters
- * @s: the sting
- * @d: the delimeter
+ * dlm_ignore - it returns the string without pre delimeters
+ * @s: the string
+ * @d: the delimiter
  * Return: the new string
  */
-
 char *dlm_ignore(char *s, char d)
 {
 	while (*s == d)
@@ -60,12 +58,11 @@ char *dlm_ignore(char *s, char d)
 }
 
 /**
- * _strtok - it tokenizes the string and returns ann array
+ * _strtok - it tokenizes the string and returns an array
  * @s: the command
  * @d: the delimeter
- * Return: arrays of token
+ * Return: array of tokens
  */
-
 char **_strtok(char *s, char *d)
 {
 	int buff_size = 0, ptr = 0, si = 0, i = 0, len = 0, se = 0, t = 0;
@@ -84,7 +81,7 @@ char **_strtok(char *s, char *d)
 		if (s[si] != ch)
 		{
 			len = f_strlen(s, si, ch);
-			token[ptr] = malloc(sizeof(char) * (len + 1));
+			tokens[ptr] = malloc(sizeof(char) * (len + 1));
 			if (tokens[ptr] == NULL)
 				return (NULL);
 			i = 0;
@@ -94,14 +91,14 @@ char **_strtok(char *s, char *d)
 				i++;
 				si++;
 			}
-			tokens[ptr][i] = '\0'
-				t++;
+			tokens[ptr][i] = '\0';
+			t++;
 		}
-		if (si < se && (s[si + 1] != ch && s[si + 1] != '\0'
-					ptr++;
-					si++;
-		}
-		ptr++;
-		tokens[ptr] = NULL;
-		return (tokens);
+		if (si < se && (s[si + 1] != ch && s[si + 1] != '\0'))
+			ptr++;
+		si++;
+	}
+	ptr++;
+	tokens[ptr] = NULL;
+	return (tokens);
 }

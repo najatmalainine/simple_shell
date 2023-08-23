@@ -106,7 +106,7 @@ int _unsetenv(list_t **envi, char **s)
 		write(STDOUT_FILENO, "Can't find\n", 12);
 		return (-1);
 	}
-	i = node_index_r(envi, idx);
+	i = node_index_rm(envi, idx);
 	if (i == -1)
 	{
 		write(STDOUT_FILENO, "Can't find\n", 12);

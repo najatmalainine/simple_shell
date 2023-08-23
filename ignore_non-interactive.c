@@ -47,7 +47,7 @@ void non_interactive(list_t *enm)
 		exit(0);
 	}
 	cmd_no = cmd;
-	cmd = c_ignore(cmd);
+	cmd = ignore_c(cmd);
 	n_line = _strtok(cmd, "\n");
 	if (cmd_no != NULL)
 		free(cmd_no);

@@ -79,3 +79,51 @@ int num_len(int no)
 	}
 	return (count);
 }
+
+/**
+ * int_to_string - makes an integer into a string
+ * @num: the number
+ * Return: the number as a string. NULL if failed
+ */
+
+char *int_to_string(int num)
+{
+	int dig, tens, j = 0, m = 0, x;
+	char *result;
+
+	dig = num;
+	tens = 1;
+
+	if (num < 0)
+		m = 1;
+	result = malloc(sizeof(char) * (num_len(dig) + 2 + m));
+	if (result == NULL)
+		return (NULL);
+	if (num < 0)
+	{
+		result[j] = '-';
+		j++;
+	}
+	for (x = 0; dig > 9 || dig < -9; x++)
+	{
+		dig /= 10;
+		tens *= 10;
+	}
+	for (dig = num; x >= 0; x--)
+	{
+		if (dig < 0)
+		{
+			result[j] = (dig / tens) * -1 + '0';
+			j++;
+		}
+		else
+		{
+			result[j] = (dig / tens) + '0';
+			j++;
+		}
+		dig %= tens;
+		tens /= 10;
+	}
+	result[j] = '\0';
+	return (result);
+}

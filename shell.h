@@ -25,37 +25,37 @@ typedef struct list
 
 } list_t;
 
-int prints_prompt(char **env);
+char *takein_space(char *s);
+char **_strtok(char *s, char *d);
+char **f_strtok(char *s, char *d);
+char *_strcat(char *dest, char *src);
+char *_strdup(char *str);
+int prints_prompt(char **ev);
 void *_realloc(void *ptr, unsigned int size_old, unsigned int size_new);
 size_t _getline(char **str);
 int f_strlen(char *s, int p, char d);
-char *takein_space(char *str);
-char **_strtok(char *str, char *delm);
-char **f_strtok(char *str, char *delm);
-char *_strcat(char *dest, char *src);
-char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 int _cd(char **cmd, list_t *envi, int n);
-int _builtin(char **token, list_t *env, int num, char **command);
-void non_interactive(list_t *env);
-char *_which(char *str, list_t *envi);
+int _builtin(char **tkn, list_t *envi, int n, char **cmd);
+void non_interactive(list_t *enm);
+char *_which(char *s, list_t *envi);
 int ___exit(char **s, list_t *envi, int n, char **cmd);
 int _execve(char **c, list_t *envi, int n);
-void free_db(char **str);
+void free_db(char **s);
+int node_index_rm(list_t **hd, int index);
+int _unsetenv(list_t **envi, char **s);
+int _setenv(list_t **envi, char **s);
+int f_envi(list_t *envi, char *s);
 void free_linked_list(list_t *list);
-int _enm(char **str, list_t *env);
-char *_getenv(char *str, list_t *env);
-list_t *enm_linked_list(char **env);
-list_t *add_end_node(list_t **head, char *str);
+int _enm(char **s, list_t *enm);
+char *_getenv(char *s, list_t *envi);
+list_t *enm_linked_list(char **enm);
+list_t *add_end_node(list_t **hd, char *s);
 size_t prints_linked_list(list_t *l);
-int node_index_rm(list_t **head, int index);
-int _unsetenv(list_t **env, char **str);
-int _setenv(list_t **env, char **str);
-int f_envi(list_t *env, char *str);
-void not_found(char *str, int num, list_t *env);
-void cmd_invalid(char *str, int c_n, list_t *env);
-void invalid_number(char *str, int c_n, list_t *env);
+void not_found(char *s, int c_no, list_t *enm);
+void cmd_invalid(char *s, int c_no, list_t *enm);
+void invalid_number(char *s, int c_no, list_t *enm);
 char *int_to_string(int num);
 
 

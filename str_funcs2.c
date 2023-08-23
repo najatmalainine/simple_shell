@@ -45,3 +45,16 @@ int f_size(char *s, char d)
 	return (delm_no);
 }
 
+/**
+ * dlm_ignore - It return the string without pre delimeters
+ * @s: the sting
+ * @d: the delimeter
+ * Return: the new string
+ */
+
+char *dlm_ignore(char *s, char d)
+{
+	while (*s == d)
+		s++;
+	return (s);
+}

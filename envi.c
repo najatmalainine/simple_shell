@@ -55,7 +55,7 @@ char *_getenv(char *s, list_t *envi)
 	while (s[n] != '\0')
 		n++;
 	n++;
-	return (c_strdup(envi->var, n));
+	return (f_strdup(envi->var, n));
 }
 
 /**
@@ -81,4 +81,78 @@ int f_envi(list_t *envi, char *s)
 	if (envi == NULL)
 		return (-1);
 	return (idx);
+}
+
+/**
+ * _unsetenv - it removes node in environment variable
+ * @envi: linked list
+ * @s: the user's command
+ * Return: 0 on success
+ */
+int _unsetenv(list_t **envi, char **s)
+{
+	int idx = 0, i = 0;
+
+	if (s[1] == NULL)
+	{
+		write(STDOUT_FILENO, "Few arguments\n", 18);
+		free_db(s);
+		return (-1);
+	}
+	idx = f_envi(*envi, s[1]);
+	free_db(s);
+	if (idx == -1)
+	{
+		write(STDOUT_FILENO, "Can't find\n", 12);
+		return (-1);
+	}
+	i = node_index_r(envi, idx);
+	if (i == -1)
+	{
+		write(STDOUT_FILENO, "Can't find\n", 12);
+		return (-1);
+	}
+	return (0);
+}
+
+/**
+ * _setenv - it creates/modify existing environment variable
+ * @envi: environment variable
+ * @s: the user's command
+ * Return: 0 on success, 1 on fail
+ */
+int _setenv(list_t **envi, char **s)
+{
+	int idx = 0, i = 0;
+	char *cat;
+	list_t *hol;
+
+	if (s[1] == NULL || s[2] == NULL)
+	{
+		write(STDOUT_FILENO, "Few arguments\n", 18);
+		free_db(s);
+		return (-1);
+	}
+	cat = _strdup(s[1]);
+	cat = _strcat(cat, "=");
+	cat = _strcat(cat, s[2]);
+	idx = f_envi(*envi, s[1]);
+	if (idx == -1)
+	{
+		add_end_node(envi, cat);
+	}
+	else
+	{
+		hol = *envi;
+		while (i < idx)
+		{
+			hol = hol->next;
+			i++;
+		}
+		free(hol->var);
+		hol->var = _strdup(cat);
+	}
+	free(cat);
+	free_db(s);
+	return (0);
 }

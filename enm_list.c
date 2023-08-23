@@ -33,4 +33,3 @@ int _enm(char **s, list_t *enm)
 	prints_linked_list(enm);
 	return (0);
 }
-

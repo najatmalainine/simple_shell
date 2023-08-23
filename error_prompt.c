@@ -40,7 +40,7 @@ void invalid_number(list_t *enm, char *s, int c_no)
  * @enm: Enviromental variables linked list
  */
 
-void not_found(char *s, int c_no, list_t *enm);
+void not_found(char *s, int c_no, list_t *enm)
 {
 	char *shell, *n;
 	int count = 0;

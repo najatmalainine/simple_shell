@@ -13,10 +13,22 @@
 #include <dirent.h>
 #include <signal.h>
 
+/**
+ * struct list - linked list for environmental variables
+ * @var: holds environmental variable string
+ * @next: points to next node
+ */
+typedef struct list
+{
+	char *var;
+	struct list *next;
+
+} list_t;
+
 int prints_prompt(char **env);
 void *_realloc(void *ptr, unsigned int size_old, unsigned int size_new);
 size_t _getline(char **str);
-int t_strlen(char *str, int pos, char delm);
+int f_strlen(char *str, int pos, char delm);
 char *takein_space(char *str);
 char **_strtok(char *str, char *delm);
 char **c_strtok(char *str, char *delm);
@@ -36,7 +48,7 @@ int _enm(char **str, list_t *env);
 char *_getenv(char *str, list_t *env);
 list_t *enm_linked_list(char **env);
 list_t *add_end_node(list_t **head, char *str);
-size_t print_list(list_t *h);
+size_t prints_linked_list(list_t *l);
 int node_index_rm(list_t **head, int index);
 int _unsetenv(list_t **env, char **str);
 int _setenv(list_t **env, char **str);
@@ -46,17 +58,5 @@ void cmd_invalid(char *str, int c_n, list_t *env);
 void invalid_number(char *str, int c_n, list_t *env);
 char *int_to_string(int num);
 
-
-/**
- * struct list - linked list for environmental variables
- * @var: holds environmental variable string
- * @next: points to next node
- */
-typedef struct list
-{
-	char *var;
-	struct list *next;
-
-} list_t;
 
 #endif

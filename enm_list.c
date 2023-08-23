@@ -29,7 +29,7 @@ list_t *enm_linked_list(char **enm)
 
 int _enm(char **s, list_t *enm)
 {
-	free_double_ptr(s);
+	free_db(s);
 	prints_linked_list(enm);
 	return (0);
 }

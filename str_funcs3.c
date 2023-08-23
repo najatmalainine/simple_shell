@@ -61,3 +61,21 @@ char **f_strtok(char *s, char *d)
 	tokens[p] = NULL;
 	return (tokens);
 }
+
+/**
+ * num_len - it returns the number of 0s in a tens power number
+ * @no: number
+ * Return: number of digits
+ */
+int num_len(int no)
+{
+	int count = 0;
+	int num = no;
+
+	while (num > 9 || num < -9)
+	{
+		num /= 10;
+		count++;
+	}
+	return (count);
+}

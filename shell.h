@@ -14,9 +14,9 @@
 #include <signal.h>
 
 /**
- * struct list - linked list for environmental variables
- * @var: holds environmental variable string
- * @next: points to next node
+ * struct list - environment variables' linked list
+ * @var: string for environment variable
+ * @next: next node
  */
 typedef struct list
 {
@@ -28,7 +28,7 @@ typedef struct list
 int prints_prompt(char **env);
 void *_realloc(void *ptr, unsigned int size_old, unsigned int size_new);
 size_t _getline(char **str);
-int f_strlen(char *str, int pos, char delm);
+int f_strlen(char *s, int p, char d);
 char *takein_space(char *str);
 char **_strtok(char *str, char *delm);
 char **c_strtok(char *str, char *delm);
